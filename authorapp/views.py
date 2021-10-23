@@ -10,7 +10,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 import math
 
-# Create your views here.
+
 def auhome(request):
     return render(request,'authorapp/auhome.html')
 
@@ -168,8 +168,6 @@ def delete_book_request(request):
         reader = Reader.objects.get(username=str(request.user))
         ps = reader.position
         group = Group.objects.get(name=ps)
-
-        # print(book_id,request_by,book_name,publisher,author,group)
         
         book_id = int(book_id)
         
@@ -195,30 +193,6 @@ def delete_book_request(request):
     return render(request,'authorapp/delete_book_request.html')
 
     
-
-# def delete_requested_books(request):
-#     del_req_books = DeleteRequest.objects.filter(publisher=str(request.user))
-    
-#     books_ids = []
-
-#     for i in del_req_books:
-#         if not i.book_id in books_ids:
-#             books_ids.append(i.book_id)
-
-#     print(books_ids)
-        
-#     del_books = []
-#     for id in books_ids:
-#         book = DeleteRequest.objects.filter(book_id=id)[0]
-#         if not book in del_books:
-#             del_books.append(book)
-
-#     print(del_books)
-
-  
-#     books = DeleteRequest.objects.filter(book_id__in=books_ids)
-#     context = {'books':books}
-#     return render(request,'authorapp/delete_requested_books.html',context)
 
 
 def delete_requested_books(request):
@@ -262,7 +236,6 @@ def liked_book(request):
         book = i.book_name
         name.append(book)
     
-    # print(name)
     books = Book.objects.filter(name__in=name)
     context ={'books':books}
     return render(request,'authorapp/liked_book.html',context)
@@ -287,7 +260,7 @@ def add_to_wishlist(request,book_id=None):
         book = Book.objects.get(pk=book_id)
         wish = Wishlist(book_id=book_id,book_name=book,user=request.user,book_author=book.author)
         wish.save()
-        messages.success(request,'Book Added to Your Wishlist')
+        messages.success(request,'Book Added to Your ReadList')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def wishlist(request):

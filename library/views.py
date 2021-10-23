@@ -13,7 +13,6 @@ from django.contrib.auth import authenticate,login
 from django.core.paginator import Paginator
 from django.db.models import Q
 
-from authorapp.views import wishlist
 
 
 
@@ -28,12 +27,7 @@ def get_feedback(request):
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-# @login_required(login_url='/')
-# def home(request):
-#     books = Book.objects.filter(status='Published')
-#     context = {'books':books}
-#     return render(request,'home.html',context)
-    # return render(request,'home.html')
+
 
 def prac(request):
     
@@ -131,7 +125,7 @@ class MyLogoutView(LogoutView):
     
 class MyPasswordChangeView(PasswordChangeView):
     template_name='changepass.html'
-    # success_url='/password_change_done/'
+
     
 class MyPasswordChangeDoneView(PasswordChangeDoneView):
     template_name='password_change_done.html'
