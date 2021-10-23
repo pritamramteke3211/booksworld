@@ -9,7 +9,7 @@ GENRE = (('Fiction','Fiction'),
 Position = (('Reader','Reader'),('Publisher','Publisher'),('Author','Author'),('Admin','Admin'))
 STATUS = (('Published','Published'),('Unpublish','Unpublish'))
 
-# Create your models here.
+
 class Book(models.Model):
     name = models.CharField(max_length=200)
     author = models.CharField(max_length=100)

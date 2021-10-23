@@ -9,7 +9,6 @@
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{{STATIC_PREFIX}}library/css/all.min.css">
     <link rel="stylesheet" href="{{STATIC_PREFIX}}library/css/bootstrap.min.css">
-<!--    {% block app_css %}<link rel="stylesheet" href="{{STATIC_PREFIX}}library/css/library.css">{% endblock app_css %}-->
     <link rel="stylesheet" href="{{STATIC_PREFIX}}library/css/library.css">
 
      {% comment %} 1. Owl Carousel Min. css {% endcomment %}
@@ -35,7 +34,6 @@
 
      {% if messages %}
             {% for message in messages %}
-                {% comment %} {% if message.tags %} {{ message.tags }} {% endif %} {% endcomment %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                     {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
