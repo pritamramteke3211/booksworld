@@ -1,0 +1,57 @@
+
+{% extends 'base.html' %}
+{% block title %}Add Book{% endblock title %}
+
+{% block body %}
+    
+
+    <div class="container my-5">
+        <div class="row mx-0 ">
+            <div class="col-md-2"></div>
+            <div class="col-sm-8 col-md-8 col-xs-8 ">
+                <h2 class=' mb-5 text-center'>Add Book</h2>
+                <form action="" method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                    <label for="name" class="form-label">Book Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="">
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="author" name='author' placeholder="">
+                    </div>
+
+
+                    <div class="mb-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="genre" name='genre' placeholder="">
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="cover" class="form-label">Book_Cover_Images</label>
+                    <input class="form-control" type="file" id="cover" name='cover'>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="pdf" class="form-label">Book_PDF</label>
+                    <input class="form-control" type="file" id="pdf" name='pdf'>
+                    </div>
+                    
+                    <div class="mb-3">
+                    <label for="summary" class="form-label">Book Description</label>
+                    <textarea class="form-control" id="summary" name='summary' rows="3"></textarea>
+                    </div>
+                    <br>
+                    <input type="submit" value='Add Book' class='btn btn-success'>
+                    <a href="{% url 'home' %}" class='btn btn-secondary'>Cancel</a>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+

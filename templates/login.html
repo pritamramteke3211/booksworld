@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock title %}
+
+{% block navbar %}{% endblock navbar %}
+{% block feedback_btn %}{% endblock feedback_btn %}
+{% block body %}
+
+  <div class="container mb-5 " style='height:75vh; margin-top:20vh;'>
+      <div class="row ">
+        <div class="col-md-3"></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 ">
+            <h2 class='text-center'>Login</h2>
+            
+            <form action="" method='POST'  style="border: Solid 1px; padding:20px;" >
+                {% csrf_token %}
+                
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Usename</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                <br>
+            
+                <input type="submit" class=' btn btn-success'  value='Login'>
+                <a href="{% url 'signup' %}" class='btn btn-info'>Register</a><br>
+                <a href="{% url 'password_reset' %}" class=''>Forget Password</a><br>
+            </form>
+            
+            {% for error in errors %}
+            <span  style='color:red; font-size:15px;'>{{error}}</span><br>
+            {% endfor %}
+            
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      
+  </div>
+
+{% endblock body %}
+
+{% block footer %}
+{% endblock footer %}
+

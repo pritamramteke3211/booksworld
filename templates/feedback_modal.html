@@ -1,0 +1,22 @@
+<!-- Feedback Modal -->
+<div class="modal fade" id="FeedbackModal" tabindex="-1" aria-labelledby="FeedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="FeedbackModalLabel">Feedback Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/feedback" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="feedback" class="form-label">Your Feedback</label>
+                        <textarea class="form-control" id="feedback" name='feedback' rows="3"></textarea>
+                    </div>
+                    <input type="submit" value="Send" class='btn btn-success'>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

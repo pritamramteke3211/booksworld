@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% block title %}Delete Book Request{% endblock title %}
+
+{% block body %}
+    
+
+    <div class="container my-5" style='min-height:67vh;'>
+        <div class="row mx-0" >
+            <div class="col-md-2"></div>
+            <div class="col-sm-8 col-md-8 col-xs-8 ">
+                <h2 class='text-center'>Delete Book Request</h2>
+
+                <form action="" method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                    <label for="book_id" class="form-label">Book Id</label>
+                    <input type="text" class="form-control" id="book_id" name="book_id" placeholder="Enter Book_id" aria-describedby="book_idHelp">
+                    <div id="book_idHelp" class="form-text">Book Id Describe in red color in small size</div>
+                    </div>
+                    <div class="mb-3">
+                    <label for="reason" class="form-label">Reason For Delete Request</label>
+                    <textarea class="form-control" id="reason" name='reason' rows="3"></textarea>
+                    </div>
+                    <br>
+                    <input type="submit" value='Send Request' class='btn btn-success'>
+                    <a href="{% url 'home' %}" class='btn btn-secondary'>Cancel</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+

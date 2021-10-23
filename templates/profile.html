@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile Page{% endblock title %}
+
+{% block body %}
+
+    
+
+   
+    <div style='min-height: 74vh;'>
+    <div class="row mx-0 my-5" >
+        
+        <div class="col-sm-3 col-xs-3 col-md-3 px-5 text-center" style='border-right: solid 2px black; '>
+            <h2>Welcome {{request.user|capfirst}}</h2>
+            
+            {% for group in request.user.groups.all %}
+                {% if group.name == 'Publisher' %}
+                    <h4>Status - <em>Publisher</em></h4>
+
+                {% elif  group.name == 'Reader'  %}
+                    <h4>Status - <em>Reader</em></h4>
+
+                {% elif  group.name == 'Author'  %}
+                    <h4>Status - <em>Author</em></h4>
+
+                {% elif  group.name == 'Admin'  %}
+                    <h4>Status - <em>Admin</em></h4>
+                {% endif %}
+            
+
+            {% if group.name == 'Admin' or  group.name == 'Author' or group.name == 'Publisher' %} 
+                <a href="{% url 'profile' %}" class=' dasboard_link'>Dashboard</a><br>
+                <a href="{% url 'books' %}" class=' dasboard_link'>Books</a><br>
+                <a href="{% url 'addbook_profile' %}" class=' dasboard_link'>Add Book</a><br>
+                <a href="{% url 'delete_requested_books' %}" class=' dasboard_link'>Delete Requested Books</a><br>
+                
+            {% endif %}
+
+            {% endfor %}
+
+            <a href="{% url 'liked_book' %}" class=" dasboard_link"> Liked Books </a><br>
+            <a href="{% url 'wishlist' %}" class=" dasboard_link"> WishList </a><br>
+            {% comment %} <a href="#" class=" dasboard_link"> ReadHistory </a><br> {% endcomment %}
+            <a href="{% url 'changepass' %}" class=" dasboard_link"> Change Password </a><br>
+            <a  href="{% url 'logout' %}">Logout</a><br>
+        </div>
+
+        <div class="col-sm-9 col-xs-9 col-md-9 px-3 py-5">
+            
+            {% block page %}
+                {% for group in request.user.groups.all %}
+                {% if group.name == 'Admin' or  group.name == 'Author' or group.name == 'Publisher' %} 
+                Total Added Books = {{books|length}}
+                <br>Total Published Books = {{published_books|length}}
+                <br>Total Unpublised Books = {{unpublished_books|length}}
+                <br>Total Delete Requested Books = {{del_req|length}}
+                {% endif %}
+                {% endfor %}
+                <br>Total Books in Wishlist = {{wishlist|length}}
+                <br>Total Liked Books = {{like_boooks|length}}
+                
+            {% endblock page %}
+
+            
+        </div>
+
+    </div>
+    </div>
+
+    
+
+{% endblock body %}
+
+

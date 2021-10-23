@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+{% block title %}SignUp{% endblock title %}
+{% block navbar %}{% endblock navbar %}
+{% block feedback_btn %}{% endblock feedback_btn %}
+
+{% block body %}
+    <div class="container  mb-5" style='height:100vh; margin-top:20vh;'> 
+        <div class="row ">
+            <div class="col-md-3"></div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <h2 class='text-center'>Reader Registration</h2>
+                    
+                    <form action="" method='POST'  style="border: Solid 1px; padding:20px;" >
+                        
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="username" name='username'  placeholder="Enter your username here.." required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter your Email here.." required>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <select class="form-select mb-3" name='position' required>
+                            <option selected>Select Your Position</option>
+                            <option value="Publisher" name='Publisher'>Publisher</option>
+                            <option value="Reader" name='Reader'>Reader</option>
+                          
+                        </select>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="pass1" name='pass1' placeholder='Choose your password' required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="pass2" name='pass2' placeholder="Enter your password again" required>
+                        </div>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">SignUp</button>
+                        <span>Already A User <a href="{% url 'login' %}"> Login here</a></span>  
+                        </form>
+                
+                   
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        
+    </div>
+{% endblock body %}
+
+
+{% block footer %}{% endblock footer %}

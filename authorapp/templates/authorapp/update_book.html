@@ -1,0 +1,19 @@
+{% extends 'profile.html' %}
+
+    {% block page %}
+    <h2 class='profile_page_heading mb-5 text-center '>Update Book</h2>
+    <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for fm in form %}           
+            {{fm.label_tag}} 
+            <span > {{fm}} </span>
+            <span style='color:red; font-size:12px;'>{{fm.errors|striptags}}</span>
+        <br>
+        {% endfor %}
+        <br>
+        <input type="submit" value='Update Book' class='btn btn-success'>
+    </form>
+
+
+    {% endblock page %}
+

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}Search Result{% endblock title %}
+
+{% block body %}
+    
+    <div class="container my-5">
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-xm-8 col-sm-8 col-md-8">
+                <h2>Search Result:</h2>
+                {% if books %}
+                <span>{{books|length}} results found for <em>{{query}}</em></span>
+                
+                <span>
+               
+                <hr>
+                {% for book in page_obj %}
+
+                    <div class="row mb-3">
+                        <div class="col-xs-3 col-sm-3 col-md-3 text-center">
+                            <img src="{{book.cover.url}}" alt="" width='170px' height='200px'><br><br>
+                        
+                            <span>
+                            <span class='like_btn_bg'><a href="{% url 'liked' book.id %}" class="like_btn"> <i class="far fa-thumbs-up"></i> Like </a>
+                            </span>
+                            <span class="likes"> {{book.likes}}</span> 
+                            </span> 
+                            
+                        
+                         </div>
+
+                        <div class="col-xs-9 col-sm-9 col-md-9 text-center">
+                        <span class='book_id'>{{book.id}}</span><br>
+                        <span class='book_title'> <a href="{% url 'book' book.id %}" >{{book.name|capfirst}}</a>  </span><br>
+                        <span class='book_author '>{{book.author}} | {{book.upload_at}}</span><br>
+                        <br>
+                        <span class=''><a href="/media/{{book.pdf}}" target="_blank" class='btn btn-info  '>View PDF</a>
+                        <a href="/media/{{book.pdf}}" class='btn btn-success' download>Download PDF</a>
+                        <a href="{% url 'add_to_wishlist' book.id %}" class='btn btn-outline-success' >Add to Wishlist</a>
+                        </span><br>
+                        </div>
+                    </div>
+                    <hr>
+
+                {% endfor %}
+
+                {% comment %} <hr> {% endcomment %}
+                    <div class="text-center">
+                        <span>
+                            {% if page_obj.has_previous %}
+                                <a href="?search={{query}}&page={{page_obj.previous_page_number}}" class='page_item'>Previous</a>
+                            {% endif %}
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                    <a class='page_item pi_active' href="?search={{query}}&page={{i}}">{{i}}</a>
+                                    {% else %}
+                                    <a class='page_item ' href="?search={{query}}&page={{i}}">{{i}}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% if page_obj.has_next %}
+                                <a href="?search={{query}}&page={{page_obj.next_page_number}}" class='page_item'>Next</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+                {% elif  query|length > 20 %}
+
+                    <div class="alert alert-info">
+
+                        <strong>No Search Results</strong><br><br>
+                        {{query|truncatechars:32}} (and any subsequent words) was ignored because we limit queries to 32 words <br><br>
+                        Your Search - <b><em>{{query|truncatechars:132}}</em></b> <br>
+                        - did not match any post
+                        <br>
+                        <br>
+                        Suggestion:
+                        <br> Try different keyword
+                        <br> Try more general keyword
+                        <br> Try fewer keyword
+                    </div>
+
+                {% else %}
+                    <div class="alert alert-info">
+                        <strong>No Search Results</strong><br><br>
+                        Your Search - <b><em> {{query|truncatechars:132}} </em></b> <br>
+                        - did not match any post
+                        <br>
+                        <br>
+                        Suggestion:
+                        <br> Try different keyword
+                        <br> Try more general keyword
+
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+

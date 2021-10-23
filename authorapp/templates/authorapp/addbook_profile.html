@@ -1,0 +1,43 @@
+{% extends 'profile.html' %}
+
+    {% block page %}
+    <h2 class='profile_page_heading  mb-5 text-center px-5'>Add Book</h2>
+    <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="name" class="form-label">Book Name</label>
+        <input type="name" class="form-control" id="name" name="name" placeholder="">
+        </div>
+
+        <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" name='author' placeholder="">
+        </div>
+
+        
+
+        <div class="mb-3">
+        <label for="genre" class="form-label">Genre</label>
+        <input type="text" class="form-control" id="genre" name='genre' placeholder="">
+        </div>
+
+        <div class="mb-3">
+        <label for="cover" class="form-label">Book_Cover_Images</label>
+        <input class="form-control" type="file" id="cover" name='cover'>
+        </div>
+
+        <div class="mb-3">
+        <label for="pdf" class="form-label">Book_PDF</label>
+        <input class="form-control" type="file" id="pdf" name='pdf'>
+        </div>
+        
+        <div class="mb-3">
+        <label for="summary" class="form-label">Book Description</label>
+        <textarea class="form-control" id="summary" name='summary' rows="3"></textarea>
+        </div>
+        <br>
+        <input type="submit" value='Add Book' class='btn btn-success'>
+    </form>
+
+    {% endblock page %}
+

@@ -1,0 +1,38 @@
+{% extends 'profile.html' %}
+
+{% block page %}
+    
+    <h2 class='profile_page_heading mb-5 text-center'>Delete Requested Books</h2>
+    
+    {% if books %}
+    <table style="width:100%" class='book_table text-center'>
+    <tr>
+        <th>Id</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Delete Requests</th>
+        <th>Delete</th>
+        <th>Details</th>
+    </tr>
+   
+        {% for book in books %}
+        <tr>
+            <td>{{book.book_id}}</td>
+            <td>{{book.book_name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{requests|length}}</td>
+            <td><a href="{% url 'delete_book' book.id %}" class='btn btn-danger'>Delete</a></td>
+            <td><a href="" class='btn btn-info'>Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+        <div class="alert alert-info">
+            You Don't have any Delete Requested Book
+        </div>
+    {% endif %}
+    
+    
+{% endblock page %}
+

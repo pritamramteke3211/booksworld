@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Change Password{% endblock title %}
+
+{% block body %}
+    <div class="row mx-0" style=' min-height: 59vh ;margin-top:10%;'>
+        <div class="col-md-3"></div>
+        
+        <div class="col-md-6 text-center" >
+            <h2>Change Password Form</h2>
+            <form action=""  method="post" novalidate style=' border: solid 1px black;' class='py-2'>
+                {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}} 
+                <span class="form-control" style='border:None'> {{fm}} </span>
+                <span style='color:red; font-size:12px;'>{{fm.errors|striptags}}</span>
+                {% endfor %}
+                <input type="submit" class='btn btn-success' value="Change Password">
+                <a href="{% url 'profile' %}" class="btn btn-info"> Cancel </a>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+{% endblock body %}
+
+

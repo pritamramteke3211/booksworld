@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}Search Result{% endblock title %}
+{% load humanize %}
+{% load social_share %}
+{% block body %}
+
+<div class="container my-5">
+    <div class="col-md-1"></div>
+    <div class="row mx-0">
+        <div class="col-sm-10 col-xs-10 col-md-10 ">
+            <h1 class="book_book_title"> {{book.name}}</h1>
+            <h4>
+                <span class='book_book_author'>By- {{book.author}}</span> |
+                <span class='book_book_publisher'>Published Here By {{book.upload_by|capfirst}}</span>
+            </h4>
+            <h4><span class='book_book_release'>Release - {{book.upload_at|date}}</span> | 
+            <span class='book_book_release'>Views - {{book.book_views}}</span>
+            </h4>
+            <div class="row mx-0 my-3">
+                <div class="col-sm-5 col-xs-5 col-md-5 pe-2">
+                    <div class="text-center">
+                        <img src="{{book.cover.url}}" alt="{{book.name}}" Title="{{book.name}}" class="book_book_cover"
+                            height='400px'>
+                    </div>
+
+                    <div class="text-center my-2">
+                        <span class='book_book_like '>
+                            <span class='like_btn_bg'>
+                                <a href="{% url 'liked' book.id %}" class="like_btn"><i class="far fa-thumbs-up"></i>
+                                    Like </a>
+                            </span>
+                            <span class="likes"> {{book.likes}}</span>
+                        </span>
+                       
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="book_book_share"><a href="" class="share_btn" data-bs-toggle="modal" data-bs-target="#shareModal"><i class="fas fa-share"></i> Share</a></span>
+                        <span>
+                        <!-- share Modal -->
+                        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="shareModalLabel">Share On</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% post_to_facebook " Book: {{book.name}}. Check it out!" "Post to Facebook!" %}
+                                {% post_to_twitter " Book: {{book.name}}. Check it out!"  "Post to Twitter" %}
+                                {% post_to_whatsapp " Book: {{book.name}}. Check it out!" "Share via WhatsApp" %}
+                                {% post_to_linkedin "Book: {{book.name}}. Check it out!" %}
+                                {% post_to_telegram "Check This Book: {{book.name}}" %}
+                            </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        </span>
+                    </div>
+
+
+
+                </div>
+                <div class="col-sm-7 col-xs-7 col-md-7 ps-2">
+                    <div class="book_book_genre my-2">
+                        Genre: {{book.genre}}
+                    </div>
+
+                    <div class="book_book_summary my-4">
+                        {{book.summary}}
+                    </div>
+
+                    <div class="book_book_button my-4">
+                        <div class='mb-2'>
+                            <span><a href="/media/{{book.pdf}}" target="_blank" class="btn btn-outline-success">Read Now</a></span>
+                            <span><a href="/media/{{book.pdf}}" class='btn btn-outline-success' download>Download </a></span>
+                        </div>
+                        
+                        <div><a href="{% url 'add_to_wishlist' book.id %}" class="btn btn-outline-success">Add to Read Later</a></div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            {% comment %} Comments Section {% endcomment %}
+            <div class='row mx-0 my-1'>
+                
+                <h4 class='comment_cls'>Comments {{comments|length}}</h4>
+                {% if comments %}
+                    <div class='just_comment'>
+                    {% for comment in comments  %}
+                        {% if comment.reply %}
+                        {% else %}
+                        <div class="alert alert-info">
+                            <b>{{comment.user|capfirst}}</b><br>
+                            <span>{{comment.comment_time|naturaltime}}</span><br>
+                            <span class='my-3'>{{comment.book_comment}}</span><br>
+                            <span class='like_btn_bg'>
+                                <a href="{% url 'comment_like' comment.id %}" class="like_btn"><i class="far fa-thumbs-up"></i>
+                                    Like </a>
+                            </span>
+                            <span class="likes"> {{comment.comment_like}}</span>
+                            <a data-bs-toggle="collapse" href="#reply{{comment.id}}" aria-expanded="false" aria-controls="reply{{comment.id}}">Reply</a>
+
+                            <div class="collapse" id="reply{{comment.id}}">
+                                    <div class="just_reply">
+                                        {% for i in reply %}
+                                           <div class="alert alert-success my-2">
+                                                <b>{{i.user|capfirst}}</b><br>
+                                                <span>{{i.comment_time|naturaltime}}</span><br>
+                                                <span class='my-3'>{{i.book_comment}}</span><br>
+                                                <span class='like_btn_bg'>
+                                                    <a href="{% url 'comment_like' comment.id %}" class="like_btn"><i class="far fa-thumbs-up"></i>
+                                                        Like </a>
+                                                </span>
+                                                <span class="likes"> {{comment.comment_like}}</span>
+                                                {% comment %} <a data-bs-toggle="collapse" href="#reply{{comment.id}}" aria-expanded="false" aria-controls="reply{{comment.id}}">Reply</a>  {% endcomment %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <hr>
+                                    <div class="my-2">
+                                        <form action="{% url 'comment' book.id %}" method="post">
+                                            {% csrf_token %}
+                                            <div class='my-2'>
+                                            <textarea name="comment" id="comment" rows="1" class='form-control' placeholder='Replay Here...'></textarea>
+                                            <input type="hidden" name="reply" value='{{comment.id}}'>
+                                            </div>
+                                            <input type="submit" value='Add Reply' class='btn btn-success'>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        Be The First to comment on this book
+                    </div>
+                {% endif %}
+                <hr>
+                <div>
+                    <form action="{% url 'comment' book.id %}" method="post">
+                        {% csrf_token %}
+                        <textarea name="comment" id="comment"  rows="2" class='form-control' placeholder='Comment Here...'></textarea>
+                        <br>
+                        <input type="submit" value='Add Comment' class='btn btn-success'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'profile.html' %}
+{% load humanize %}
+{% block title %}Wishlisted Books{% endblock title %}
+
+{% block page %}
+    <h2 class='profile_page_heading mb-5 text-center'>Wishlisted Books</h2>
+      {% if books %}
+        {% for book in books %}
+
+                    <div class="row mb-3 mx-5">
+                        <div class="col-xs-3 col-sm-3 col-md-3 text-center">
+                            <img src="{{book.book_name.cover.url}}" alt="" width='170px' height='200px'><br><br>
+                        
+                            <span>
+                            <span class='like_btn_bg'><a href="{% url 'liked' book.id %}" class="like_btn"> <i class="far fa-thumbs-up"></i> Like </a>
+                            </span>
+                            <span class="likes"> {{book.book_name.likes}}</span> 
+                            </span> 
+                            
+                        
+                         </div>
+
+                        <div class="col-xs-9 col-sm-9 col-md-9 text-center">
+                        <span class='book_id'>{{book.id}}</span><br>
+                        <span class='book_title'> <a href="{% url 'book' book.id %}" >{{book.book_name.name|capfirst}}</a>  </span><br>
+                        <span class='book_author '>{{book.book_name.author}} | {{book.book_name.upload_at}}</span><br>
+                        <br>
+                        
+                        </div>
+                    </div>
+                    <hr>
+
+                {% endfor %}
+
+    {% endif %}
+    
+    
+{% endblock page %}
+
