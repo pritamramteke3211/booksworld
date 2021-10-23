@@ -4,20 +4,19 @@ from django.urls import path,include
 from . import views
 from . import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('prac',views.prac, name='prac'),
     path('signup/',views.signup, name='signup'),
-    # path('userapp',include('userapp.urls')),
     path('authorapp/',include('authorapp.urls')),
     path('adminapp/',include('adminapp.urls')),
-    # path('', views.HomePage.as_view(), name='home'),
-
+   
     path('feedback', views.get_feedback, name='get_feedback'),
 
-    # path('home/', views.home, name='home'),
-    path('profile/', views.UserProfile.as_view(), name="profile"), ## classed view
+    path('profile/', views.UserProfile.as_view(), name="profile"),
 
     path('', views.user_login, name="login"), ## classed view
     
@@ -30,6 +29,9 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', views.MyPasswordResetConfirmView.as_view(),name='password_reset_confirm'),
     path('reset/done/', views.MyPasswordResetCompleteView.as_view(),name='password_reset_complete'),
 
-    path('book_search/',views.book_search,name='book_search')
+    path('book_search/',views.book_search,name='book_search'),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':  settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
