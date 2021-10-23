@@ -1,6 +1,7 @@
 {% extends 'profile.html' %}
 
     {% block page %}
+    <div class="px-5">
     <h2 class='profile_page_heading mb-5 text-center '>Update Book</h2>
     <form action="" method='POST' enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,6 +15,6 @@
         <input type="submit" value='Update Book' class='btn btn-success'>
     </form>
 
-
+</div>
     {% endblock page %}
 

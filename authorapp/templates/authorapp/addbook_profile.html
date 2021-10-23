@@ -1,7 +1,8 @@
 {% extends 'profile.html' %}
 
     {% block page %}
-    <h2 class='profile_page_heading  mb-5 text-center px-5'>Add Book</h2>
+    <div class='mx-5'>
+    <h2 class='profile_page_heading  mb-5 text-center '>Add Book</h2>
     <form action="" method='POST' enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
@@ -13,8 +14,6 @@
         <label for="author" class="form-label">Author</label>
         <input type="text" class="form-control" id="author" name='author' placeholder="">
         </div>
-
-        
 
         <div class="mb-3">
         <label for="genre" class="form-label">Genre</label>
@@ -38,6 +37,7 @@
         <br>
         <input type="submit" value='Add Book' class='btn btn-success'>
     </form>
+    </div>
 
     {% endblock page %}
 
