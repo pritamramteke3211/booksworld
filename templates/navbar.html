@@ -35,8 +35,8 @@
             {% endfor %}
             
             <li><a class="dropdown-item" href="{% url 'liked_book' %}">Liked Books</a></li>
-            <li><a class="dropdown-item" href="{% url 'wishlist' %}">WishList</a></li>
-            <li><a class="dropdown-item" href="#">ReadHistory</a></li>
+            <li><a class="dropdown-item" href="{% url 'wishlist' %}">ReadList</a></li>
+            {% comment %} <li><a class="dropdown-item" href="#">ReadHistory</a></li> {% endcomment %}
             <li><a class="dropdown-item" href="{% url 'changepass' %}">Change Password</a></li>
             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
           </ul>

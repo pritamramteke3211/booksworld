@@ -39,7 +39,7 @@
             {% endfor %}
 
             <a href="{% url 'liked_book' %}" class=" dasboard_link"> Liked Books </a><br>
-            <a href="{% url 'wishlist' %}" class=" dasboard_link"> WishList </a><br>
+            <a href="{% url 'wishlist' %}" class=" dasboard_link"> ReadList </a><br>
             {% comment %} <a href="#" class=" dasboard_link"> ReadHistory </a><br> {% endcomment %}
             <a href="{% url 'changepass' %}" class=" dasboard_link"> Change Password </a><br>
             <a  href="{% url 'logout' %}">Logout</a><br>
@@ -48,6 +48,7 @@
         <div class="col-sm-9 col-xs-9 col-md-9 px-3 py-5">
             
             {% block page %}
+                <div class="text-center">
                 {% for group in request.user.groups.all %}
                 {% if group.name == 'Admin' or  group.name == 'Author' or group.name == 'Publisher' %} 
                 Total Added Books = {{books|length}}
@@ -58,7 +59,7 @@
                 {% endfor %}
                 <br>Total Books in Wishlist = {{wishlist|length}}
                 <br>Total Liked Books = {{like_boooks|length}}
-                
+                </div>
             {% endblock page %}
 
             
