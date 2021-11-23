@@ -22,7 +22,7 @@
             <td>{{book.author}}</td>
             <td>{{requests|length}}</td>
             <td><a href="{% url 'delete_book' book.id %}" class='btn btn-danger'>Delete</a></td>
-            <td><a href="{% url 'book' book.id %}" class='btn btn-info'>Details</a></td>
+            <td><a href="{% url 'book' book.book_id %}" class='btn btn-info'>Details</a></td>
         </tr>
         {% endfor %}
     </table>

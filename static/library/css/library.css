@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2&family=Roboto&display=swap');
+
+/* 
+font-family: 'Baloo Da 2', cursive;
+font-family: 'Roboto', sans-serif; */
+
+
+
 /* HomePage */
  .slide{
       height: 50vh;
@@ -106,6 +114,9 @@
 
 /* Home */
  /* Owl Carousel */
+ .item{
+      margin: 0 35px;
+ }
  .item img
      {
      
@@ -123,7 +134,8 @@
 }
 
 .card-body{
-     height: 100px;
+     /* height: 100px; */
+     height: 140px;
 }
 
 .banner_title{
@@ -156,4 +168,33 @@
 .share_btn:hover{
      color:red;
      text-decoration: none;
+}
+
+/**/
+.login_page{
+     background-image: url('../images/books_night.jfif');
+     background-repeat: no-repeat;
+     /* background-size: 100%; */
+     height: 100vh;
+     background-size: cover ;
+     /* margin-top: -200px; */
+}
+
+.login_page h1{
+     font-size: 60px;
+}
+
+.login_page h1,h2,p,label,a{
+     font-family: 'Baloo Da 2', cursive;
+     font-weight: 600;
+}
+
+.login_page a,label{
+     font-size: 18px;
+     color: white;
+     font-weight: 400!important;
+}
+
+.login_page form{
+     background-color:rgb(138, 135, 135,0.4);
 }

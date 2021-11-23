@@ -157,38 +157,48 @@ def books(request):
 def delete_book_request(request):
     if request.method == 'POST':
 
-        book_id = request.POST['book_id']
+        book_id = int(request.POST['book_id'])
         reason = request.POST['reason']
-        book = Book.objects.get(id=book_id)
-        request_by = request.user
-        book_name = book.name
-        publisher = book.upload_by
-        author = book.author
-        
-        reader = Reader.objects.get(username=str(request.user))
-        ps = reader.position
-        group = Group.objects.get(name=ps)
-        
-        book_id = int(book_id)
-        
-        del_book_id = DeleteRequest.objects.filter(Q(book_id=book_id) & Q(request_by=request.user))
-        
-        ids = []
-        for i in del_book_id:
-            if not i.book_id in ids:
-                ids.append(i.book_id)
 
-        if book_id in ids:
-            messages.warning(request,'You already send delete request for this book')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER')) ## return to same page 
-    
+        books = Book.objects.values_list('id',flat=True)
+        # print(books)
+        ids = [i for i in books]
         
-        del_req = DeleteRequest(book_id=book_id,request_by=request_by,book_name=book_name,publisher=publisher,author=author,position=group,reason=reason)
+        if book_id not in ids:
+            messages.error(request,f'No Book for id - {book_id} is published on this website.')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-        del_req.save()
-        messages.success(request,'Your Delete Request Submitted Sucessfully')
+        else:
+            book = Book.objects.get(id=book_id)
+            request_by = request.user
+            book_name = book.name
+            publisher = book.upload_by
+            author = book.author
+            
+            reader = Reader.objects.get(username=str(request.user))
+            ps = reader.position
+            group = Group.objects.get(name=ps)
+            
+            book_id = int(book_id)
+            
+            del_book_id = DeleteRequest.objects.filter(Q(book_id=book_id) & Q(request_by=request.user))
+            
+            ids = []
+            for i in del_book_id:
+                if not i.book_id in ids:
+                    ids.append(i.book_id)
 
-        return redirect('home')
+            if book_id in ids:
+                messages.warning(request,'You already send delete request for this book')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER')) ## return to same page 
+        
+            
+            del_req = DeleteRequest(book_id=book_id,request_by=request_by,book_name=book_name,publisher=publisher,author=author,position=group,reason=reason)
+
+            del_req.save()
+            messages.success(request,'Your Delete Request Submitted Sucessfully')
+
+            return redirect('home')
 
     return render(request,'authorapp/delete_book_request.html')
 

@@ -42,7 +42,6 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        
 
         if pass1 != pass2 :
             messages.error(request,'Password Fields Not Matched!')

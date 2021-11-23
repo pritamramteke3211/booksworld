@@ -5,13 +5,15 @@
 {% block feedback_btn %}{% endblock feedback_btn %}
 
 {% block body %}
-    <div class="container  mb-5" style='height:100vh; margin-top:20vh;'> 
+
+<div class="login_page">
+     <div class="container text-white  mb-5" style='height:100vh; padding-top:20vh;'> 
         <div class="row ">
             <div class="col-md-3"></div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class='text-center'>
                 <h1 >Welcome To BooksWorld</h1>
-                <p style='font-size: 14px; color:grey;'>Become a BooksWorld Member</p>
+                <p style='font-size: 20px; color:white;'>Become a BooksWorld Member</p>
                 <h2 class='text-center'>SignUp</h2>
                 </div>
                     <form action="" method='POST'  style="border: Solid 1px; padding:20px;" >
@@ -21,7 +23,7 @@
                         </div>
                         <div class="mb-3">
                             <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter your Email here.." required>
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
                         </div>
                         <select class="form-select mb-3" name='position' required>
                             <option selected>Select Your Position</option>
@@ -47,6 +49,8 @@
         </div>
         
     </div>
+</div>
+   
 {% endblock body %}
 
 

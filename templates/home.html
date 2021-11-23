@@ -3,7 +3,7 @@
 {% block title %}BooksWorld{% endblock title %}
 
 {% block body %}
-    <div class=" px-0">
+    <div class=" px-0 ">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -55,13 +55,14 @@
             <br>
             <div class="row">
 
-                <div class="owl-carousel owl-theme">
+                <div class="owl-carousel owl-theme ">
                     {% for book in popular_books %}
-                    <div class="item mx-4">
-                    <div class="card border-0 shadow">
+                    <div class="item  ">
+                    <div class="card border-0 shadow my-4">
                         <img src="{{book.cover.url}}" alt="" class="card-img-top ">
                         <div class="card-body" >
                             <a href="{% url 'book' book.id %}" >
+                            <div class="text-center">{{book.id}}</div>
                             <h4 class='text-center owl_book_name'>{{book.name}}</h4>
                             </a>
 
